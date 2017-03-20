@@ -13,13 +13,13 @@
 <a href="index.jsp"><img src="images/schronisko_w_krzesimowie.png" alt="schronisko"></a>
 </header>
 	<nav>
-		<ul class="menu">
+	<ul class="menu">				
 		<li><a href="home" title="Strona główna">Strona główna</a></li>
 		<li><a href="o_schronisku" title="O schronisku">O schronisku</a></li>
-		<li><a href="zwierzeta" title="Zwierzęta">Zwierzęta</a></li>
 		<li><a href="szukaj" title="Sponsorzy">Szukaj</a></li>
 		<li><a href="kontakt" title="Kontakt">Kontakt</a></li>
-		</ul>
+		<li><a href="formularz_zgloszeniowy" title="formularz_zgloszeniowy">Dodaj</a></li>
+		
 	</nav>
 
 	<article>

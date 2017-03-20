@@ -54,12 +54,13 @@ img
 
 table {
     border: 1px solid black;
-    width: 300px;
+    width: 700px;
+    table-layout: fixed;
 }
 
 table th, td {
 	border: 1px solid black;
-	width: 100px;
+	width: 150px;
 }
 
 button {
@@ -115,9 +116,13 @@ legend
 input
 {
 	width: 400px;
-	height: 30px;
+	height: 20px;
 	background-color: silver;
+	display: inline-block;
+  	float: left;
 }
+
+
 p.przycisk input
 {
 	width: 100px;
@@ -125,4 +130,27 @@ p.przycisk input
 p.przycisk
 {
 	text-align: center;
+}
+
+section 
+{
+	text-align: left;
+}
+
+label
+{
+   	display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: left;	
+}
+
+section 
+{
+	font-style: italic;
+}
+
+iframe {border:10px solid #000;
+    border-radius: 10px !important;
 }

@@ -6,10 +6,9 @@ import java.util.List;
 
 public interface AnimalDAOInterface {
 
-	List<Animal> findAll();
-	List<Animal> findByName(String name) throws SQLException;
-	List<Animal> findByRace(String rasa) throws SQLException;
-	void addAnimal(String imie, String rasa, int wiek);
-	void removeAnimal(int id);
+	void addAnimal(String imie, String rodzaj, String gatunek, String plec, String wielkosc, String infoDodatkowe);
+	void addCircumstances(String miejsce, String dodatkoweInfo);
 	void addMessage(String mess);
+	void addPersonalData(String imieNazwisko, long telefon);
+	List<Animal> findAnimal(String imie, String gatunek, String plec, String wielkosc, String miejsceZaginiecia) throws SQLException;
 }

@@ -16,22 +16,29 @@
 		<ul class="menu">				
 		<li><a href="home" title="Strona główna">Strona główna</a></li>
 		<li><a href="o_schronisku" title="O schronisku">O schronisku</a></li>
-		<li><a href="zwierzeta" title="Zwierzęta">Zwierzęta</a></li>
 		<li><a href="szukaj" title="Sponsorzy">Szukaj</a></li>
 		<li><a href="kontakt" title="Kontakt">Kontakt</a></li>
+		<li><a href="formularz_zgloszeniowy" title="formularz_zgloszeniowy">Dodaj</a></li>
+		
 		</ul>
 	</nav>
 
 	<article>
 		<section>
-			<form action="MainController" method="post">
-			<input type="text" name="imie" required="" placeholder="imie"><br>
-			<input type="text" name="rasa" required="" placeholder="rasa"><br>
-			<input type="text" name="wiek" required="" placeholder="wiek"><br>
-				<button type="submit">
-				Dodaj zwierze
-				</button>
-			</form>
+	<h1>Witaj na stronie naszego schroniska!</h1> <br><br>
+	
+	Szanowni Państwo,
+W naszym schronisku znajduje się wiele spragnionych uczucia i domu psów i kotów , które z utęsknieniem czkają na ludzi chcących dać im prawdziwy dom i opiekę. W chwili obecnej w schronisku przebywa około 300 psów i 100 kotów różnych ras i wielkości.
+ <br><br>
+Schronisko dla Bezdomnych Zwierząt przyjmuje zwierzęta przez całą dobę, a wydaje nowym opiekunom w godzinach 10.00 - 14.00 i 15.00 - 17.00 przez wszystkie dni tygodnia (w niedziele i święta także)
+ <br><br> 
+Schronisko dla Bezdomnych Zwierząt powstało w 1994 roku. Zostało zbudowane ze środków Gminy Miasta Krakowa oraz Krakowskiego Towarzystwa Opieki nad Zwierzętami.
+	<br><br>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/0vrdgDdPApQ" 
+		frameborder="0" allowfullscreen></iframe>
+	<br><br>
+	Schronisko dla Bezdomnych Zwierząt jest utrzymywane przede wszystkim z pieniędzy przekazywanych przez Miasto Kraków. Ponadto wspomagane jest ze środków zgromadzonych przez Krakowskie Towarzystwo Opieki nad Zwierzętami w Krakowie oraz hojnych darów mieszkańców Krakowa.  
+
 		</section>
 	</article>
 	<aside>

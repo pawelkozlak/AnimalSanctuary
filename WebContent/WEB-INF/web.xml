@@ -54,5 +54,14 @@
     <url-pattern>/kontakt</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+  	<servlet-name>dodaj</servlet-name>
+  	<jsp-file>/dodaj.jsp</jsp-file>	
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>dodaj</servlet-name>
+    <url-pattern>/formularz_zgloszeniowy</url-pattern>
+  </servlet-mapping>
+  
   
 </web-app>

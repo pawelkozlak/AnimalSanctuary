@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sanctuary.kozlak.model.Animal;
 import com.sanctuary.kozlak.model.AnimalDAOImpl;
+import com.sanctuary.kozlak.model.AnimalDAOInterface;
 
 /**
  * Servlet implementation class SzukajController
@@ -39,34 +40,47 @@ public class SzukajController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AnimalDAOImpl ao = new AnimalDAOImpl();
+		AnimalDAOInterface ao = new AnimalDAOImpl();
+		
 		String imie = request.getParameter("imie");
-		String rasa = request.getParameter("rasa");
+		String rasa = request.getParameter("gatunek");
+		String plec = request.getParameter("plec");
+		String wielkosc = request.getParameter("wielkosc");
+		String miejsceZaginiecia = request.getParameter("miejsceZaginiecia");
 		
-		if(!imie.equals("")){
-					
-			try {
-				List<Animal> listAnimalsByName = ao.findByName(imie);
-				request.setAttribute("listAnimalsByName", listAnimalsByName);
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.getRequestDispatcher("szukaj.jsp").forward(request, response);
-			}
+		if(rasa.equals("")){
+			rasa = "%";
+		}
 		
-		else if(!rasa.equals("")){
-			try {
-				List<Animal> listAnimalsByRace = ao.findByRace(rasa);
-				request.setAttribute("listAnimalsByRace", listAnimalsByRace);
-				
+		if(plec.equals("wybierz")){
+			plec = "%";
+		}
+		
+		if(wielkosc.equals("wybierz")){
+			wielkosc = "%";
+		}
+		
+		if(miejsceZaginiecia.equals("")){
+			miejsceZaginiecia = "%";
+		}
+		
+		try {
+			List<Animal> listOfAnimals = ao.findAnimal(imie, rasa, plec, wielkosc, miejsceZaginiecia);
+			if(listOfAnimals.isEmpty()){
+			request.setAttribute("message", "Nie znaleziono zwierząt o podanych parametrach");
+			}else{
+			request.setAttribute("listOfAnimals", listOfAnimals);
+			}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.getRequestDispatcher("szukaj.jsp").forward(request, response);
-			}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("szukaj.jsp").forward(request, response);
+		
+	
+		
+		
+	
 	   }
 	}
 

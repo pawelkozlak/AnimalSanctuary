@@ -19,45 +19,61 @@
 		<ul class="menu">				
 		<li><a href="home" title="Strona główna">Strona główna</a></li>
 		<li><a href="o_schronisku" title="O schronisku">O schronisku</a></li>
-		<li><a href="zwierzeta" title="Zwierzęta">Zwierzęta</a></li>
 		<li><a href="szukaj" title="Sponsorzy">Szukaj</a></li>
 		<li><a href="kontakt" title="Kontakt">Kontakt</a></li>
-		</ul>
+		<li><a href="formularz_zgloszeniowy" title="formularz_zgloszeniowy">Dodaj</a></li>
+		
 	</nav>
 
 	<article>
 		<section>
 			<form action="SzukajController" method="post">
-				<button type="submit">
-				Szukaj zwierze po imieniu
-				</button>
-			<input type="text" name="imie"  placeholder="imie"><br>			
-				<button type="submit">
-				Szukaj zwierze po rasie
-				</button>
-			<input type="text" name="rasa" placeholder="rasa"><br>			
+				<br><br><label>Rasa:</label>
+			<input type="text" name="gatunek"  placeholder="rasa"><br><br>			
+	------------------------------------------------------------------
+				<br><label>Płeć:</label>
+					<select name="plec">
+					  <option selected> wybierz</option>
+					  <option value="samiec">samiec</option>
+					  <option value="samica">samica</option>
+					</select><br>
+	------------------------------------------------------------------				
+				<br><br><label>Wielkość:</label>
+					<select name="wielkosc">
+		 		  		<option selected> wybierz</option>
+		 		  		<option value="duzy">duzy</option>
+		 		  		<option value="sredni">sredni</option>
+		 		  		<option value="maly">maly</option>
+					</select><br>
+	------------------------------------------------------------------				
+				<br><br><label>Miejsce zaginięcia:</label>
+			<input type="text" name="miejsceZaginiecia"  placeholder="miejsce zaginiecia"><br><br>
 				
-			
-			</form>
-			<c:forEach items="${listAnimalsByName}" var="animalByName">
+				<button type="submit">
+				Szukaj
+				</button>			
+			</form><br>
+				<table>
+				<tr>
+				<td>Imię</td>
+				<td>Rasa</td>
+				<td>Płeć</td>
+				<td>Wielkość</td>
+				<td>Miejsce Zaginięcia</td>
+				</tr>
+				</table>
+			<c:forEach items="${listOfAnimals}" var="animalByName">
 				<table>
 				<tr>
 				<td>${animalByName.name}</td>
 				<td>${animalByName.rasa}</td>
-				<td>${animalByName.wiek}</td>
+				<td>${animalByName.plec}</td>
+				<td>${animalByName.wielkosc}</td>
+				<td>${animalByName.miejsceZaginiecia}</td>
 				</tr>
 				</table>
 			</c:forEach>
-			
-			<c:forEach items="${listAnimalsByRace}" var="animalByRace">
-				<table>
-				<tr>
-				<td>${animalByRace.name}</td>
-				<td>${animalByRace.rasa}</td>
-				<td>${animalByRace.wiek}</td>
-				</tr>
-				</table>
-			</c:forEach>
+			${message}
 		</section>
 	</article>
 	<aside>

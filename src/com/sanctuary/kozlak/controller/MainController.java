@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sanctuary.kozlak.model.AnimalDAOImpl;
+import com.sanctuary.kozlak.model.AnimalDAOInterface;
 
 /**
  * Servlet implementation class MainController
@@ -35,14 +36,28 @@ public class MainController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AnimalDAOImpl ao = new AnimalDAOImpl();
+		AnimalDAOInterface ao = new AnimalDAOImpl();
 		
 		String imie = request.getParameter("imie");
-		String rasa = request.getParameter("rasa");
-		int wiek =  Integer.parseInt(request.getParameter("wiek"));
+		String rodzaj = request.getParameter("rodzaj");
+		String gatunek = request.getParameter("gatunek");
+		String plec = request.getParameter("plec");
+		String wielkosc = request.getParameter("wielkosc");
+		String infoDodatkowe = request.getParameter("infoDodatkowe");
 		
-		ao.addAnimal(imie, rasa, wiek);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		String miejsce = request.getParameter("miejsce");
+		String infoDodatkoweZaginiecie = request.getParameter("dodatkoweInformacje");
+		
+		String imieNazwisko = request.getParameter("imieNazwisko");
+		long telefon = Long.parseLong(request.getParameter("telefon"));
+		
+		ao.addAnimal(imie, rodzaj, gatunek, plec, wielkosc, infoDodatkowe);
+		ao.addCircumstances(miejsce, infoDodatkoweZaginiecie);
+		ao.addPersonalData(imieNazwisko, telefon);
+		
+		request.setAttribute("message", "Dziękujemy! Zwierzę zostało dodane do bazy.");
+		request.getRequestDispatcher("dodaj.jsp").forward(request, response);
+		
 	}
 
 }

@@ -3,13 +3,17 @@ package com.sanctuary.kozlak.model;
 public class Animal {
 	String name;
 	String rasa;
-	int wiek;
+	String plec;
+	String wielkosc;
+	String miejsceZaginiecia;
 	
-	public Animal(String name, String rasa, int wiek) {
+
+	public Animal(String name, String rasa, String plec, String wielkosc, String miejsceZaginiecia) {
 		this.name = name;
 		this.rasa = rasa;
-		this.wiek = wiek;
-
+		this.plec = plec;
+		this.wielkosc = wielkosc;
+		this.miejsceZaginiecia = miejsceZaginiecia;
 	}
 	
 	public String getName() {
@@ -28,13 +32,31 @@ public class Animal {
 		this.rasa = rasa;
 	}
 
-	public int getWiek() {
-		return wiek;
+	public String getPlec() {
+		return plec;
 	}
 
-	public void setWiek(int wiek) {
-		this.wiek = wiek;
+	public void setPlec(String plec) {
+		this.plec = plec;
 	}
 	
+	public void setWiek(String plec) {
+		this.plec = plec;
+	}
+	public String getWielkosc() {
+		return wielkosc;
+	}
+
+	public void setWielkosc(String wielkosc) {
+		this.wielkosc = wielkosc;
+	}
+
+	public String getMiejsceZaginiecia() {
+		return miejsceZaginiecia;
+	}
+
+	public void setMiejsceZaginiecia(String miejsceZaginiecia) {
+		this.miejsceZaginiecia = miejsceZaginiecia;
+	}
 	
 }

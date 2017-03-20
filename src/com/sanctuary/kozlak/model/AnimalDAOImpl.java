@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
@@ -18,54 +20,19 @@ public class AnimalDAOImpl implements AnimalDAOInterface{
 	MysqlConnection mysqlConnect = new MysqlConnection();
 	PreparedStatement statement;
 	List<Animal> animalList = new ArrayList<Animal>();
- 	
-	@Override
-	public List<Animal> findAll() {
-		try {
-			statement = mysqlConnect.connect().prepareStatement("SELECT * FROM `animal`");
-			ResultSet rs = statement.executeQuery();
-			while(rs.next()){
-				Animal animal = new Animal(rs.getString(2), rs.getString(3), rs.getInt(4));
-				animalList.add(animal);
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} finally {
-			mysqlConnect.disconnect();
-		}
-		return animalList;
-	}
-	
-	@Override
-	public List<Animal> findByName(String name) throws SQLException{
-		statement = mysqlConnect.connect().prepareStatement("SELECT * FROM `animal` WHERE `imie`='"+name+"'");
-		ResultSet rs = statement.executeQuery();
-			while(rs.next()){
-				Animal animal = new Animal(rs.getString(2), rs.getString(3), rs.getInt(4));
-				animalList.add(animal);
-			}
-		return animalList;
-	}
 
-	@Override
-	public List<Animal> findByRace(String rasa) throws SQLException{
-		statement = mysqlConnect.connect().prepareStatement("SELECT * FROM `animal` WHERE `rasa`='"+rasa+"'");
-		ResultSet rs = statement.executeQuery();
-			while(rs.next()){
-				Animal animal = new Animal(rs.getString(2), rs.getString(3), rs.getInt(4));
-				animalList.add(animal);
-			}
-		return animalList;
-	}
+
 	
 	@Override
-	public void addAnimal(String imie, String rasa, int wiek) {
+	public void addAnimal(String imie, String rodzaj, String gatunek, String plec, String wielkosc, String infoDodatkowe) {
 		try {
-			statement = mysqlConnect.connect().prepareStatement("INSERT INTO `animal`(`imie`,`rasa`,`wiek`) VALUES (?,?,?)");
+			statement = mysqlConnect.connect().prepareStatement("INSERT INTO `animal`(`imie`,`typ`,`gatunek`,`plec`,`wielkosc`,`informacjeDodatkowe`) VALUES (?,?,?,?,?,?)");
 			statement.setString(1, imie);
-			statement.setString(2, rasa);
-			statement.setInt(3, wiek);
+			statement.setString(2, rodzaj);
+			statement.setString(3, gatunek);
+			statement.setString(4, plec);
+			statement.setString(5, wielkosc);
+			statement.setString(6, infoDodatkowe);
 			int i = statement.executeUpdate();
 			System.out.println(i+ "records inserted");
 			
@@ -78,15 +45,37 @@ public class AnimalDAOImpl implements AnimalDAOInterface{
 	}
 	
 	@Override
-	public void removeAnimal(int id){
+	public void addCircumstances(String miejsce, String dodatkoweInfo)
+	{
 		try{
-			statement = mysqlConnect.connect().prepareStatement("DELETE FROM `animal` WHERE `animal`.`id`="+id);
+			statement = mysqlConnect.connect().prepareStatement("INSERT INTO `okolicznoscizaginiecia`(`miejsce`,`dodatkoweInfo`) VALUES (?,?)");
+			statement.setString(1, miejsce);
+			statement.setString(2, dodatkoweInfo);
 			int i = statement.executeUpdate();
-			System.out.println(i+ "records deleted");
-		}catch(SQLException e){
+			System.out.println(i+ "records inserted");
+		}catch (SQLException e){
 			e.printStackTrace();
+		}finally {
+			mysqlConnect.disconnect();
 		}
 	}
+	
+	@Override
+	public void addPersonalData(String imieNazwisko, long telefon)
+	{
+		try{
+			statement = mysqlConnect.connect().prepareStatement("INSERT INTO `zglaszajacy`(`imieNazwisko`,`telefon`) VALUES (?,?)");
+			statement.setString(1, imieNazwisko);
+			statement.setLong(2, telefon);
+			int i = statement.executeUpdate();
+			System.out.println(i+ "records inserted");		
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally {
+			mysqlConnect.disconnect();
+		}
+	}
+	
 
 	@Override
 	public void addMessage(String message) {
@@ -102,8 +91,19 @@ public class AnimalDAOImpl implements AnimalDAOInterface{
 		}
 		
 	}
-
 	
-
+	
+	@Override
+	public List<Animal> findAnimal(String imie, String gatunek, String plec, String wielkosc, String miejsceZaginiecia) throws SQLException
+	{
+		statement = mysqlConnect.connect().prepareStatement("SELECT * FROM `animal` LEFT JOIN `okolicznoscizaginiecia` ON animal.id = okolicznoscizaginiecia.id WHERE animal.gatunek LIKE '"+gatunek+
+				"' AND animal.plec LIKE '"+plec+"' AND animal.wielkosc LIKE '"+wielkosc+"' AND okolicznoscizaginiecia.miejsce LIKE '"+miejsceZaginiecia+"'");	
+		ResultSet rs = statement.executeQuery();
+		while(rs.next()){
+			Animal animal = new Animal(rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+			animalList.add(animal);
+		}
+	return animalList;
+	}
 	
 }
